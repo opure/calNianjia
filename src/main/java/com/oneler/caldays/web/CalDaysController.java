@@ -47,7 +47,13 @@ public class CalDaysController {
 
         //2017新的构造函数
 
-        LocalDate juli = LocalDate.of(2017, ruzhi.getMonth(), ruzhi.getDayOfMonth());
+        LocalDate juli = null;
+        try {
+            juli = LocalDate.of(2017, ruzhi.getMonth(), ruzhi.getDayOfMonth());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "对不起,你输入的入职时间格式有误,请重新输入!";
+        }
 
         //2018新的构造函数
 
