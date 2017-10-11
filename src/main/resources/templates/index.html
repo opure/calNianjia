@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="://.w3.org/1999/xhtml" xmlns:th="://.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>查询年假</title>
+    <style>
+        body {
+            text-align: center
+        }
+
+        .div {
+            margin: 0 auto;
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+<div class="div">
+    <input type="text" id="text" placeholder="时间格式:2017-01-01"/>
+    <button type="button" onclick="search()">查询</button>
+    <div id="result1"></div>
+    <div id="result2"></div>
+</div>
+<script>
+    function search() {
+        var time = $("#text").val();
+        if(time==null || time.length ==0) {
+            alert("时间不能为空!")
+            return false;
+        }
+        $.post("/getResult", {time: $("#text").val()}, function (result) {
+            $("#result1").html(result.substr(0,result.indexOf("|")));
+            $("#result2").html(result.substr(result.indexOf("|")+1,result.length));
+        });
+    }
+</script>
+</body>
+</html>
