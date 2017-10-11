@@ -30,7 +30,7 @@ public class CalDaysController {
     @PostMapping(value = "/getResult")
     @ResponseBody
     public String caldays(String time) {
-        logger.info("使用次数" + atomicInteger.incrementAndGet() +time);
+        logger.info("使用次数" + atomicInteger.incrementAndGet() + time);
         LocalDate year17 = LocalDate.of(2017, 12, 31);
 
         LocalDate year18 = LocalDate.of(2018, 12, 31);
@@ -46,18 +46,19 @@ public class CalDaysController {
         }
 
         //2017新的构造函数
+        int days;
 
-        LocalDate juli = null;
-        try {
-            juli = LocalDate.of(2017, ruzhi.getMonth(), ruzhi.getDayOfMonth());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "对不起,你输入的入职时间格式有误,请重新输入!";
+        if (ruzhi.getDayOfMonth() == 29) {
+            days = 28;
+        } else {
+            days = ruzhi.getDayOfMonth();
         }
+        LocalDate juli = LocalDate.of(2017, ruzhi.getMonth(), days);
+
 
         //2018新的构造函数
 
-        LocalDate new18 = LocalDate.of(2018, ruzhi.getMonth(), ruzhi.getDayOfMonth());
+        LocalDate new18 = LocalDate.of(2018, ruzhi.getMonth(), days);
 
         //2017年
 
@@ -92,7 +93,7 @@ public class CalDaysController {
         stringBuilder.append("截止到2017年12月31日年假小时数为" + year1 + "小时,约为" + nf.format(year1 / 7.5) + "天|");
         stringBuilder.append("截止到2018年12月31日年假小时数为" + (step1 + stem2) + "小时,约为" + nf.format((step1 + stem2) / 7.5) + "天");
 
-        logger.info("查询成功的次数" + atomicIntegers.incrementAndGet() +"查询时间为" + time);
+        logger.info("查询成功的次数" + atomicIntegers.incrementAndGet() + "查询时间为" + time);
         return stringBuilder.toString();
     }
 
