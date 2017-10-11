@@ -30,7 +30,7 @@ public class CalDaysController {
     @PostMapping(value = "/getResult")
     @ResponseBody
     public String caldays(String time) {
-        logger.info("使用次数" + atomicInteger.incrementAndGet());
+        logger.info("使用次数" + atomicInteger.incrementAndGet() +time);
         LocalDate year17 = LocalDate.of(2017, 12, 31);
 
         LocalDate year18 = LocalDate.of(2018, 12, 31);
